@@ -45,7 +45,7 @@ class UserControllerTest {
 
     @Test
     void shouldReturnExceptionEmailEmpty() {
-        user = new User(1, "QQQ", "QQ QQQ", "", LocalDate.of(1987, 12, 12));
+        user = new User(1, "", "QQ QQQ", "", LocalDate.of(1987, 12, 12));
         String error;
         try {
             uc.createUser(user);
