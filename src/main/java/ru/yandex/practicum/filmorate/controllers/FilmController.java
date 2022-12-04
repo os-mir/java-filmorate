@@ -21,7 +21,6 @@ public class FilmController {
     @GetMapping("/films")
     public List<Film> allUsers() {
         return films;
-
     }
 
     @PostMapping(value = "/films")
@@ -33,7 +32,6 @@ public class FilmController {
         } catch (ValidationException exp) {
             throw new ValidationException(exp.getMessage());
         }
-
         return film;
     }
 
@@ -60,7 +58,7 @@ public class FilmController {
                 }
             }
 
-            if (exist == false) {
+            if (!exist) {
                 throw new ExceptionExisting("Нет такого фильма");
             }
         } catch (ExceptionExisting err) {

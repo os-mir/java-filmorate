@@ -23,7 +23,6 @@ public class UserController {
 
     @GetMapping("/users")
     public List<User> allUsers() {
-
         return users;
     }
 
@@ -33,7 +32,6 @@ public class UserController {
             validation(user);
             user.setId(++id);
             users.add(user);
-
         } catch (ValidationException exp) {
             log.debug(exp.getMessage());
             throw new ValidationException(exp.getMessage());
@@ -49,15 +47,12 @@ public class UserController {
             for (User usr : users) {
                 if (usr.getId() == user.getId()) {
                     exist = true;
-
                     try {
                         validation(user);
-
                         usr.setLogin(user.getLogin());
                         usr.setName(user.getName());
                         usr.setBirthday(user.getBirthday());
                         usr.setEmail(user.getEmail());
-
                     } catch (ValidationException exp) {
                         log.debug(exp.getMessage());
                         throw new ValidationException(exp.getMessage());
@@ -94,8 +89,5 @@ public class UserController {
             log.debug(exp.getMessage());
             throw new ValidationException(exp.getMessage());
         }
-
     }
-
-
 }
