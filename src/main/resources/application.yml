@@ -1,0 +1,9 @@
+logging:
+    level:
+        org:
+            springframework:
+                web:
+                    servlet:
+                        DispatcherServlet: ERROR
+server:
+  port : 8080   # port : 0
