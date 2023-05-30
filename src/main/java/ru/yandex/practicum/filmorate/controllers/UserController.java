@@ -7,6 +7,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.exceptions.NotFoundException;
 import ru.yandex.practicum.filmorate.model.User;
+import ru.yandex.practicum.filmorate.storage.film.FilmStorage;
+import ru.yandex.practicum.filmorate.storage.film.InMemoryFilmStorage;
+import ru.yandex.practicum.filmorate.storage.user.InMemoryUserStorage;
+import ru.yandex.practicum.filmorate.storage.user.UserStorage;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -16,51 +20,30 @@ import java.util.List;
 @Validated
 @Data
 public class UserController {
-    private List<User> users = new ArrayList<>();
-    private int id = 0;
-    private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
+    private final UserStorage userService = new InMemoryUserStorage();
     @GetMapping("/users")
     public List<User> allUsers() {
-        return users;
+        return userService.allUsers();
+
     }
 
     @PostMapping(value = "/users")
     public User createUser(@Valid @RequestBody User user) {
-
-            user.setId(++id);
-            users.add(user);
-
-        return user;
+    return userService.createUser(user);
     }
 
 
     @PutMapping(value = "/users")
     public User updateUser(@Valid @RequestBody User user) {
-        int userIndex=isExist(user);
+        return userService.updateUser(user);
+    }
 
-               if (userIndex!=-1) {
-
-                   users.set(userIndex,user);
-                                   }
-
-        return user;
+    @DeleteMapping(value = "/users")
+    public User deleteUser(@Valid @RequestBody User user) {
+        return userService.deleteUser(user);
     }
 
 
-    int isExist(User user){
-        boolean exist = false;
-
-        for (User usr : users) {
-            if (usr.getId() == user.getId()) {
-                exist = true;
-                return users.indexOf(usr);
-            }
-        }
-        if (!exist) {
-            throw new NotFoundException("Нет такого пользователя");
-        }
-
-            return -1;
-    }
 }
