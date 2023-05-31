@@ -8,7 +8,7 @@ import ru.yandex.practicum.filmorate.model.User;
 
 public class UserService {
 
-    private Map<Integer, ArrayList<User>> friends= new HashMap<>();
+    private Map<User, ArrayList<User>> friends= new HashMap<>();
     private List<User> currentFriends;
 
     //берём список текущих друзей
