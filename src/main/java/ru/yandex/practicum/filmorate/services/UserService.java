@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import ru.yandex.practicum.filmorate.model.User;
 
+import org.springframework.stereotype.Service;
+import ru.yandex.practicum.filmorate.model.User;
+@Service
 public class UserService {
 
     private Map<User, ArrayList<User>> friends= new HashMap<>();
